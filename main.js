@@ -7,12 +7,11 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipc = electron.ipcMain;
 
-// Create the browser window.
 let mainWindow;
 
 function emitUnreadCount() {
 	mainWindow.webContents.executeJavaScript(`
-    require('electron').ipcRenderer.send('unread', document.querySelector('.simpleUnreadCount').innerHTML);
+		require('electron').ipcRenderer.send('unread', document.querySelector('.simpleUnreadCount').innerHTML);
 	`);
 }
 
