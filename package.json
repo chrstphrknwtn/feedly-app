@@ -1,0 +1,17 @@
+{
+  "name": "feedly-app",
+  "productName": "Feedly",
+  "version": "0.0.0",
+  "description": "Run feedly in as an app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . --overwrite --out='build' --icon='./icon/feedly.icns'"
+  },
+  "author": "Christopher Newton (https://github.com/chrstphrknwtn)",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "1.4.15",
+    "electron-packager": "8.5.2"
+  }
+}
