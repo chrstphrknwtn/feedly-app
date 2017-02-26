@@ -89,7 +89,11 @@ app.on('ready', () => {
 // time) and for getting a 'last known value' when switching to another app.
 ipc.on('unread', (_, value) => {
 	let count = parseInt(value, 10);
-	app.dock.setBadge(count.toString());
+	if (isNaN(count)) {
+		app.dock.setBadge('');
+	} else {
+		app.dock.setBadge(count.toString());
+	}
 });
 
 // Click on dock icon brings back mainWindow
