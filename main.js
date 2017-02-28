@@ -21,8 +21,7 @@ function createMainWindow() {
 		minWidth: 1080,
 		height: 1200,
 		titleBarStyle: 'hidden-inset',
-		webPreferences: {allowDisplayingInsecureContent: true},
-		show: false
+		webPreferences: {allowDisplayingInsecureContent: true}
 	});
 
 	mainWindow.loadURL('https://feedly.com');
