@@ -92,7 +92,7 @@ function createMainWindow() {
 		console.log(url);
 		if (url.indexOf('feedly.com') < 0) {
 			e.preventDefault();
-			shell.openExternal(url);
+			shell.openExternal(url, {activate: false});
 		}
 	});
 
