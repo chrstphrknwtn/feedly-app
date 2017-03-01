@@ -9,6 +9,31 @@ const ipc = electron.ipcMain;
 
 let mainWindow;
 
+function injectIdleTimer() {
+	mainWindow.webContents.executeJavaScript(`
+    let t;
+    window.onload = resetInterval;
+		window.onscroll = resetInterval;
+
+    document.onload = resetInterval;
+    document.onmousemove = resetInterval;
+    document.onmousedown = resetInterval;
+    document.ontouchstart = resetInterval;
+    document.onclick = resetInterval;
+    document.onscroll = resetInterval;
+    document.onkeypress = resetInterval;
+
+    function backToAllTab() {
+      document.getElementById('latesttab_label').click();
+    }
+
+    function resetInterval() {
+      clearInterval(t);
+      t = setInterval(backToAllTab, 300000); // 5 minutes
+    }
+	`);
+}
+
 function emitUnreadCount() {
 	mainWindow.webContents.executeJavaScript(`
 		require('electron').ipcRenderer.send('unread', document.querySelector('.simpleUnreadCount').innerHTML);
@@ -57,10 +82,14 @@ function createMainWindow() {
 	});
 
 	mainWindow.webContents.on('did-navigate-in-page', emitUnreadCount);
-	mainWindow.webContents.on('dom-ready', emitUnreadCount);
+	mainWindow.webContents.on('dom-ready', () => {
+		emitUnreadCount();
+		injectIdleTimer();
+	});
 
 	// Open external links in default browser
 	mainWindow.webContents.on('new-window', (e, url) => {
+		console.log(url);
 		if (url.indexOf('feedly.com') < 0) {
 			e.preventDefault();
 			shell.openExternal(url);
