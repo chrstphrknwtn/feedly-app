@@ -2,7 +2,7 @@
   "name": "feedly-app",
   "productName": "Feedly",
   "version": "0.0.0",
-  "description": "Run feedly in as an app",
+  "description": "Feedly as a macOS app",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -11,7 +11,7 @@
   "author": "Christopher Newton (https://github.com/chrstphrknwtn)",
   "license": "ISC",
   "dependencies": {
-    "electron": "1.4.15",
-    "electron-packager": "8.5.2"
+    "electron": "1.6.6",
+    "electron-packager": "8.7.0"
   }
 }
