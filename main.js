@@ -11,26 +11,26 @@ let mainWindow;
 
 function injectIdleTimer() {
 	mainWindow.webContents.executeJavaScript(`
-    let t;
-    window.onload = resetInterval;
+		let t;
+		window.onload = resetInterval;
 		window.onscroll = resetInterval;
 
-    document.onload = resetInterval;
-    document.onmousemove = resetInterval;
-    document.onmousedown = resetInterval;
-    document.ontouchstart = resetInterval;
-    document.onclick = resetInterval;
-    document.onscroll = resetInterval;
-    document.onkeypress = resetInterval;
+		document.onload = resetInterval;
+		document.onmousemove = resetInterval;
+		document.onmousedown = resetInterval;
+		document.ontouchstart = resetInterval;
+		document.onclick = resetInterval;
+		document.onscroll = resetInterval;
+		document.onkeypress = resetInterval;
 
-    function backToAllTab() {
-      document.getElementById('latesttab_label').click();
-    }
+		function backToAllTab() {
+			document.getElementById('latesttab_label').click();
+		}
 
-    function resetInterval() {
-      clearInterval(t);
-      t = setInterval(backToAllTab, 300000); // 5 minutes
-    }
+		function resetInterval() {
+			clearInterval(t);
+			t = setInterval(backToAllTab, 300000); // 5 minutes
+		}
 	`);
 }
 
@@ -116,7 +116,7 @@ app.on('ready', () => {
 // It's only good for starting up the app (which seems to not work 100% of the
 // time) and for getting a 'last known value' when switching to another app.
 ipc.on('unread', (_, value) => {
-	let count = parseInt(value, 10);
+	const count = parseInt(value, 10);
 	if (isNaN(count)) {
 		app.dock.setBadge('');
 	} else {
