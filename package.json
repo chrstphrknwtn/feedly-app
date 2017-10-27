@@ -11,7 +11,7 @@
   "author": "Christopher Newton (https://github.com/chrstphrknwtn)",
   "license": "ISC",
   "dependencies": {
-    "electron": "1.6.6",
-    "electron-packager": "8.7.0"
+    "electron": "1.7.9",
+    "electron-packager": "9.1.0"
   }
 }
