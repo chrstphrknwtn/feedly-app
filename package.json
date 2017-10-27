@@ -1,7 +1,7 @@
 {
   "name": "feedly-app",
   "productName": "Feedly",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Feedly as a macOS app",
   "main": "main.js",
   "scripts": {
