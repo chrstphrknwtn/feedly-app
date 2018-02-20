@@ -123,19 +123,9 @@ app.on('ready', () => {
 });
 
 // Set dock icon to unread count.
-// This is kind of pointless as the 'unread'
-// event is triggered by interaction with the app, and also because feedly
-// does not asyncronously update the unread count (you have to interact with
-// the page).
-// It's only good for starting up the app (which seems to not work 100% of the
-// time) and for getting a 'last known value' when switching to another app.
 ipc.on('unread', (_, value) => {
-	const count = parseInt(value, 10);
-	if (isNaN(count)) {
-		app.dock.setBadge('');
-	} else {
-		app.dock.setBadge(count.toString());
-	}
+	const count = parseInt(value, 10).toString();
+	app.dock.setBadge(count.trim());
 });
 
 // Click on dock icon brings back mainWindow
