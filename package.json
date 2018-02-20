@@ -1,12 +1,14 @@
 {
   "name": "feedly-app",
-  "productName": "Feedly",
   "version": "0.0.1",
+  "productName": "Feedly",
+  "appVersion": "Zero",
+  "appCopyright": "Christopher Newton",
   "description": "Feedly as a macOS app",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . --overwrite --out='build' --icon='./icon/feedly.icns'"
+    "build": "node build.js"
   },
   "author": "Christopher Newton (https://github.com/chrstphrknwtn)",
   "license": "ISC",
