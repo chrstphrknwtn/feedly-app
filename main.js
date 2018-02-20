@@ -1,13 +1,12 @@
 'use strict';
 
 const electron = require('electron');
-const shell = require('electron').shell;
-const globalShortcut = require('electron').globalShortcut;
-const Menu = require('electron').Menu;
 
 const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
 const ipc = electron.ipcMain;
+const shell = electron.shell;
+const Menu = electron.Menu;
+const BrowserWindow = electron.BrowserWindow;
 
 let mainWindow;
 
@@ -47,7 +46,8 @@ function createMainWindow() {
 		width: 1260,
 		minWidth: 1080,
 		height: 1200,
-		titleBarStyle: 'hidden-inset',
+		titleBarStyle: 'hiddenInset',
+		frame: false,
 		webPreferences: {allowDisplayingInsecureContent: true}
 	});
 
@@ -77,7 +77,8 @@ function createMainWindow() {
 				letter-spacing: 0 !important;
 			}
 			#searchBarFX,
-			#headerBarFX {
+			#headerBarFX,
+			.fixed-bar {
 				-webkit-app-region: drag;
 			}`);
 		mainWindow.show();
@@ -109,31 +110,42 @@ function createMainWindow() {
 app.on('ready', () => {
 	createMainWindow();
 
-	// Shortcuts
-	globalShortcut.register('CommandOrControl+W', () => {
-    mainWindow.hide();
-  });
+	const template = [
+		{
+			label: 'Application',
+			submenu: [
+				{label: 'About Feedly', selector: 'orderFrontStandardAboutPanel:'},
+				{type: 'separator'},
+				{label: 'Quit', accelerator: 'Command+Q', click: () => {
+					app.quit();
+				}}
+			]
+		}, {
+			label: 'Edit',
+			submenu: [
+				{label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:'},
+				{label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:'},
+				{type: 'separator'},
+				{label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:'},
+				{label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:'},
+				{label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:'},
+				{label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:'}
+			]
+		}, {
+			label: 'Window',
+			submenu: [
+				{label: 'Hide', accelerator: 'CmdOrCtrl+W', click: () => {
+					mainWindow.hide();
+				}},
+				{type: 'separator'},
+				{label: 'Main Window', accelerator: 'CmdOrCtrl+1', click: () => {
+					mainWindow.show();
+				}}
+			]
+		}
+	];
 
-	const template = [{
-        label: "Application",
-        submenu: [
-            { label: "About Feedly", selector: "orderFrontStandardAboutPanel:" },
-            { type: "separator" },
-            { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
-        ]}, {
-        label: "Edit",
-        submenu: [
-            { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
-            { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
-            { type: "separator" },
-            { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
-            { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
-            { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
-            { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
-        ]}
-    ];
-
-    Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+	Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 });
 
 // Set dock icon to unread count.
