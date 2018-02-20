@@ -12,7 +12,7 @@ let mainWindow;
 
 function emitUnreadCount() {
 	mainWindow.webContents.executeJavaScript(`
-		require('electron').ipcRenderer.send('unread', document.querySelector('.simpleUnreadCount').innerHTML);
+		require('electron').ipcRenderer.send('unread', document.querySelector('[data-category="global.all"]').innerHTML);
 	`);
 }
 
@@ -59,9 +59,9 @@ function createMainWindow() {
 		mainWindow.show();
 	});
 
-	mainWindow.webContents.on('did-navigate-in-page', emitUnreadCount);
-	mainWindow.webContents.on('dom-ready', () => {
-		emitUnreadCount();
+	// Events on which to update the unread count
+	['did-navigate-in-page', 'ready-to-show'].forEach(event => {
+		mainWindow.webContents.on(event, emitUnreadCount);
 	});
 
 	// Open external links in default browser
