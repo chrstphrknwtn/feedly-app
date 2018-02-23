@@ -1,0 +1,35 @@
+.dark #feedlyTabsHolder,
+.dark #feedlyTabs,
+.dark #addContentPlaceholderFX button {
+  background-color:#121212 !important
+}
+#integrationstab_header,
+#integrationstab_icon,
+#integrationstab_label,
+#librarytab,
+#tagList,
+#supporttab,
+#supporttab + div,
+#searchBarFX button.pro {
+  display: none !important;
+}
+html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,
+h1 a,
+.title,
+.fx .entry .summary,
+.fx .button,.fx button,.fx-button {
+  font-family: BlinkMacSystemFont !important;
+  letter-spacing: 0 !important;
+}
+#searchBarFX,
+#headerBarFX,
+.fixed-bar {
+  -webkit-app-region: drag;
+}
+#feedlyTabs > div:first-child {
+  opacity: 0;
+  height: 28px;
+}
+#addContentPlaceholderFX .button--label {
+  display: none;
+}

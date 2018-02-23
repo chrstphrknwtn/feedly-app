@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const electron = require('electron');
 
 const app = electron.app;
@@ -7,6 +9,8 @@ const ipc = electron.ipcMain;
 const shell = electron.shell;
 const Menu = electron.Menu;
 const BrowserWindow = electron.BrowserWindow;
+
+const CSS = fs.readFileSync(path.join(__dirname, 'main.css'));
 
 let mainWindow;
 
@@ -19,7 +23,7 @@ function emitUnreadCount() {
 function createMainWindow() {
 	mainWindow = new BrowserWindow({
 		width: 1260,
-		minWidth: 1080,
+		minWidth: 1260,
 		height: 1200,
 		titleBarStyle: 'hiddenInset',
 		frame: false,
@@ -30,33 +34,18 @@ function createMainWindow() {
 
 	// Add some custom CSS and show mainWindow
 	mainWindow.webContents.on('did-finish-load', () => {
-		mainWindow.webContents.insertCSS(`
-			.dark #feedlyTabsHolder,
-			.dark #feedlyTabs,
-			.dark #addContentPlaceholderFX button {
-				background-color:#181818 !important
+		mainWindow.webContents.insertCSS(`${CSS}`);
+		mainWindow.webContents.executeJavaScript(`
+			var pinNavInterval = setInterval(tryPinNav, 1000);
+
+			function tryPinNav() {
+				var pinNavButton = document.querySelector('[data-app-action="pinLeftNav"]');
+				if (pinNavButton) {
+					pinNavButton.click();
+					clearInterval(pinNavInterval);
+				}
 			}
-			#integrationstab_header,
-			#integrationstab_icon,
-			#integrationstab_label,
-			#librarytab,
-			#searchBarFX button.pro {
-				display: none !important
-			}
-			html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,
-			h1 a,
-			.title,
-			.fx .entry .summary,
-			.fx .button,.fx button,.fx-button {
-				font-family: BlinkMacSystemFont !important;
-				letter-spacing: 0 !important;
-			}
-			#searchBarFX,
-			#headerBarFX,
-			.fixed-bar {
-				-webkit-app-region: drag;
-			}`);
-		mainWindow.show();
+		`);
 	});
 
 	// Events on which to update the unread count
@@ -66,7 +55,6 @@ function createMainWindow() {
 
 	// Open external links in default browser
 	mainWindow.webContents.on('new-window', (e, url) => {
-		console.log(url);
 		if (url.indexOf('feedly.com') < 0) {
 			e.preventDefault();
 			shell.openExternal(url, {activate: false});
@@ -114,6 +102,9 @@ app.on('ready', () => {
 				{type: 'separator'},
 				{label: 'Main Window', accelerator: 'CmdOrCtrl+1', click: () => {
 					mainWindow.show();
+				}},
+				{label: 'Dev Tools', accelerator: 'CmdOrCtrl+Option+i', click: () => {
+					mainWindow.openDevTools();
 				}}
 			]
 		}
@@ -124,7 +115,7 @@ app.on('ready', () => {
 
 // Set dock icon to unread count.
 ipc.on('unread', (_, value) => {
-	const count = parseInt(value, 10).toString();
+	const count = value.toString();
 	app.dock.setBadge(count.trim());
 });
 
