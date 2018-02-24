@@ -5,14 +5,16 @@
   "appVersion": "Zero",
   "appCopyright": "Christopher Newton",
   "description": "Feedly as a macOS app",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron src/main.js",
     "build": "node build.js"
   },
   "author": "Christopher Newton (https://github.com/chrstphrknwtn)",
   "license": "ISC",
   "devDependencies": {
+    "appdmg": "0.5.2",
+    "chalk": "2.3.1",
     "electron": "2.0.0-beta.1",
     "electron-packager": "11.0.1"
   }

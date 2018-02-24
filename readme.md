@@ -2,14 +2,12 @@
 
 # Feedly app
 
-A basic [electron](http://electron.atom.io) app so [feedly](feedly.com) looks just how I
-like it.
+A basic [electron](http://electron.atom.io) app so [feedly](feedly.com) looks
+just how I like it
 
-![feedly screenshot](screenshot.png)
+![feedly screenshot](images/screenshot.png)
 
 ## Features
 
-- Decent icon
-- Unread count icon badge
-- External links open in default browser
-- Custom CSS injection
+- Decent icon with unread badge
+- External links open in default browser in the background
