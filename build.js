@@ -1,3 +1,5 @@
+'use-strict';
+
 const fs = require('fs');
 const path = require('path');
 const c = require('chalk');
@@ -56,7 +58,7 @@ function createDmgInstaller(appPath) {
 			background: 'images/installer-background.png',
 			contents: [
 				{x: 448, y: 344, type: 'link', path: '/Applications'},
-				{x: 192, y: 344, type: 'file',path: path.join(appPath, `${pkg.productName}.app`)}
+				{x: 192, y: 344, type: 'file', path: path.join(appPath, `${pkg.productName}.app`)}
 			]
 		}
 	};
