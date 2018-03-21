@@ -1,13 +1,13 @@
-![feedly.app](icon/feedly-128.png)
-
-# Feedly app
-
-A basic [electron](http://electron.atom.io) app so [feedly](feedly.com) looks
-just how I like it
-
-[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
+<div align="center">
+  <img src="icon/feedly-128.png" width="128" height="128">
+  <br />
+  <h1 style="margin-bottom:3rem">Feedly App</h1>
+</div>
 
 ![feedly screenshot](images/screenshot.png)
+
+A basic [electron](http://electron.atom.io) app so [feedly](feedly.com) looks
+just how I like it.
 
 ## Features
 
