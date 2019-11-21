@@ -1,19 +1,16 @@
-.dark #feedlyTabsHolder,
-.dark #feedlyTabs,
-.dark #addContentPlaceholderFX button {
-  background-color:#121212 !important
-}
-#integrationstab_header,
-#integrationstab_icon,
-#integrationstab_label,
-#librarytab,
-#tagList,
-#supporttab,
-#supporttab + div,
-#searchBarFX button.pro {
-  display: none !important;
-}
-html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,
+/* Use SF Pro everywhere */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
 h1 a,
 .title,
 .fx .entry .summary,
@@ -21,15 +18,53 @@ h1 a,
   font-family: BlinkMacSystemFont !important;
   letter-spacing: 0 !important;
 }
+/* Make the window draggable, when scrolled nothing seems to work */
 #searchBarFX,
-#headerBarFX,
+#headerBarFX > div,
 .fixed-bar {
-  -webkit-app-region: drag;
+  -webkit-app-region: drag !important;
 }
-#feedlyTabs > div:first-child {
-  opacity: 0;
-  height: 28px;
+
+:root {
+  --left-nav-dock-width: 78px;
+  --left-nav-list-width: 270px;
+  --left-nav-total-width: calc(var(--left-nav-dock-width) + var(--left-nav-list-width));
 }
-#addContentPlaceholderFX .button--label {
+
+/* NEW */
+.Leftnav__dock {
+  width: var(--left-nav-dock-width) !important;
+  padding-top: 38px !important;
+}
+
+.LeftnavList {
+  width: var(--left-nav-list-width) !important;
+  margin-left: var(--left-nav-dock-width) !important;
+}
+
+#feedlyChrome__leftnav-wrapper {
+  width: var(--left-nav-total-width) !important;
+}
+
+.feedlyChrome--leftnav-open #feedlyFrame {
+  margin-left: var(--left-nav-total-width) !important;
+}
+
+.feedlyChrome--leftnav-open .fixed-bar,
+.feedlyChrome--leftnav-open .LeftnavPin {
+  left: var(--left-nav-total-width) !important;
+}
+
+.feedlyChrome--leftnav-peek .fixed-bar,
+.feedlyChrome--leftnav-peek .LeftnavPin {
+  left: var(--left-nav-dock-width) !important;
+  transform: translateX(var(--left-nav-list-width)) !important;
+}
+
+.feedlyChrome--leftnav-peek #feedlyFrame {
+  margin-left: var(--left-nav-dock-width) !important;
+}
+
+#searchBarFX .notification {
   display: none;
 }

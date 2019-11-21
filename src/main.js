@@ -16,7 +16,11 @@ let mainWindow;
 
 function emitUnreadCount() {
 	mainWindow.webContents.executeJavaScript(`
-		require('electron').ipcRenderer.send('unread', document.querySelector('[data-category="global.all"]').innerHTML);
+		try {
+			require('electron').ipcRenderer.send('unread', document.querySelector('[title="All"] .LeftnavListRow__count').innerHTML);
+		} catch (e) {
+			console.log(e);
+		}
 	`);
 }
 
@@ -24,10 +28,14 @@ function createMainWindow() {
 	mainWindow = new BrowserWindow({
 		width: 1260,
 		minWidth: 1260,
-		height: 1200,
+		maxWidth: 1260,
+		height: 1600,
 		titleBarStyle: 'hiddenInset',
 		frame: false,
-		webPreferences: {allowDisplayingInsecureContent: true}
+		webPreferences: {
+      nodeIntegration: true,
+			allowDisplayingInsecureContent: true
+		}
 	});
 
 	mainWindow.loadURL('https://feedly.com');
@@ -35,17 +43,6 @@ function createMainWindow() {
 	// Add some custom CSS and show mainWindow
 	mainWindow.webContents.on('did-finish-load', () => {
 		mainWindow.webContents.insertCSS(`${CSS}`);
-		mainWindow.webContents.executeJavaScript(`
-			var pinNavInterval = setInterval(tryPinNav, 1000);
-
-			function tryPinNav() {
-				var pinNavButton = document.querySelector('[data-app-action="pinLeftNav"]');
-				if (pinNavButton) {
-					pinNavButton.click();
-					clearInterval(pinNavInterval);
-				}
-			}
-		`);
 	});
 
 	// Events on which to update the unread count
