@@ -16,9 +16,9 @@
   "author": "Christopher Newton (https://github.com/chrstphrknwtn)",
   "license": "ISC",
   "devDependencies": {
-    "appdmg": "0.5.2",
-    "chalk": "2.4.1",
-    "electron": "2.0.0-beta.8",
-    "electron-packager": "12.0.1"
+    "appdmg": "0.6.0",
+    "chalk": "3.0.0",
+    "electron": "7.1.2",
+    "electron-packager": "14.1.0"
   }
 }

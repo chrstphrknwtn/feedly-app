@@ -25,18 +25,16 @@ const options = {
 /*
  * Package Electron App
  */
-packager(options, (err, appPaths) => {
-	if (err) {
-		console.error(err);
-		return;
-	}
+async function bundleElectronApp(options) {
+	const appPaths = await packager(options);
 	if (appPaths.length === 1) {
 		/* Only darwin x64 specified, so there _should_ be only a single appPath and
-		 * this _should_ be suitable for creating a macOS installer dmg.
-		 */
+		* this _should_ be suitable for creating a macOS installer dmg.
+		*/
 		createDmgInstaller(appPaths[0]);
 	}
-});
+}
+bundleElectronApp(options);
 
 /*
  * Create Installer
