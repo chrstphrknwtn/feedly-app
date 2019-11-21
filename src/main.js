@@ -14,13 +14,38 @@ const CSS = fs.readFileSync(path.join(__dirname, 'main.css'));
 
 let mainWindow;
 
-function emitUnreadCount() {
+function initUnreadCount() {
 	mainWindow.webContents.executeJavaScript(`
-		try {
-			require('electron').ipcRenderer.send('unread', document.querySelector('[title="All"] .LeftnavListRow__count').innerHTML);
-		} catch (e) {
-			console.log(e);
+		const { ipcRenderer } = require('electron');
+
+		function init() {
+			const target = document.querySelector('[title="All"] > .LeftnavListRow__count');
+
+			// Call recursively until DOM element is present
+			if (!target) {
+				setTimeout(init, 500);
+				return;
+			}
+
+			// Send initial unread value
+			ipcRenderer.send('unread', target.innerHTML);
+
+			// Observe unread value
+			function subscriber(mutations) {
+			  mutations.forEach((mutation) => {
+					ipcRenderer.send('unread', mutation.target.textContent);
+			  });
+			}
+			const observer = new MutationObserver(subscriber);
+
+			observer.observe(target, {
+			  characterData: true,
+			  characterDataOldValue: true,
+			  childList: true,
+			  subtree: true
+			});
 		}
+		init();
 	`);
 }
 
@@ -40,14 +65,10 @@ function createMainWindow() {
 
 	mainWindow.loadURL('https://feedly.com');
 
-	// Add some custom CSS and show mainWindow
+	// Add some custom CSS, initialise unread count badge observer
 	mainWindow.webContents.on('did-finish-load', () => {
 		mainWindow.webContents.insertCSS(`${CSS}`);
-	});
-
-	// Events on which to update the unread count
-	['did-navigate-in-page', 'ready-to-show'].forEach(event => {
-		mainWindow.webContents.on(event, emitUnreadCount);
+		initUnreadCount();
 	});
 
 	// Open external links in default browser
