@@ -6,6 +6,9 @@
   "appCopyright": "Christopher Newton",
   "description": "Feedly as a macOS app",
   "main": "src/main.js",
+  "engines": {
+    "node": "10.7"
+  },
   "scripts": {
     "start": "electron src/main.js",
     "build": "node build.js"
