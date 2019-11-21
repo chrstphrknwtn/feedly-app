@@ -15,7 +15,7 @@ h1 a,
 .title,
 .fx .entry .summary,
 .fx .button,.fx button,.fx-button {
-  font-family: BlinkMacSystemFont !important;
+  font-family: 'SF Pro Text' !important; /* Explicity set SF Pro Text as Chrome on Catalina is broken */
   letter-spacing: 0 !important;
 }
 /* Make the window draggable, when scrolled nothing seems to work */
