@@ -16,4 +16,4 @@ just how I like it.
 
 ## Download
 
-[Feedly for macOS](https://github.com/chrstphrknwtn/feedly-app/releases/download/v0.0.3/Feedly_macOS.dmg)
+[Feedly for macOS](https://github.com/chrstphrknwtn/feedly-app/releases/download/0.0.4/Feedly_macOS_0-0-4.dmg)
