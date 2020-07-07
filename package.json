@@ -18,7 +18,7 @@
   "devDependencies": {
     "appdmg": "0.6.0",
     "chalk": "3.0.0",
-    "electron": "7.1.2",
+    "electron": "7.2.4",
     "electron-packager": "14.1.0"
   }
 }
