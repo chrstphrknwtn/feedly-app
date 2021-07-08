@@ -1,4 +1,4 @@
-/* Use SF Pro everywhere */
+/* Use System Font */
 html,
 body,
 h1,
@@ -14,9 +14,14 @@ li,
 h1 a,
 .title,
 .fx .entry .summary,
+.fx .entry .entry__title,
 .fx .button,.fx button,.fx-button {
-  font-family: 'SF Pro Text' !important; /* Explicity set SF Pro Text as Chrome on Catalina is broken */
-  letter-spacing: 0 !important;
+  font-family: BlinkMacSystemFont !important;
+}
+
+.Heading--h2,
+.fx .entry .entry__title {
+  letter-spacing: unset !important;
 }
 
 :root {
