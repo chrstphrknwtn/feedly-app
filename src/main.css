@@ -18,12 +18,6 @@ h1 a,
   font-family: 'SF Pro Text' !important; /* Explicity set SF Pro Text as Chrome on Catalina is broken */
   letter-spacing: 0 !important;
 }
-/* Make the window draggable, when scrolled nothing seems to work */
-#searchBarFX,
-#headerBarFX > div,
-.fixed-bar {
-  -webkit-app-region: drag !important;
-}
 
 :root {
   --left-nav-dock-width: 78px;
@@ -31,7 +25,6 @@ h1 a,
   --left-nav-total-width: calc(var(--left-nav-dock-width) + var(--left-nav-list-width));
 }
 
-/* NEW */
 .Leftnav__dock {
   width: var(--left-nav-dock-width) !important;
   padding-top: 38px !important;
@@ -42,29 +35,33 @@ h1 a,
   margin-left: var(--left-nav-dock-width) !important;
 }
 
-#feedlyChrome__leftnav-wrapper {
-  width: var(--left-nav-total-width) !important;
-}
-
-.feedlyChrome--leftnav-open #feedlyFrame {
-  margin-left: var(--left-nav-total-width) !important;
-}
-
-.feedlyChrome--leftnav-open .fixed-bar,
-.feedlyChrome--leftnav-open .LeftnavPin {
-  left: var(--left-nav-total-width) !important;
-}
-
-.feedlyChrome--leftnav-peek .fixed-bar,
-.feedlyChrome--leftnav-peek .LeftnavPin {
-  left: var(--left-nav-dock-width) !important;
-  transform: translateX(var(--left-nav-list-width)) !important;
-}
-
-.feedlyChrome--leftnav-peek #feedlyFrame {
+/* Dock Closed */
+#feedlyFrame,
+#barsFX {
   margin-left: var(--left-nav-dock-width) !important;
 }
 
-#searchBarFX .notification {
-  display: none;
+#feedlyFrame {
+  height: 100%;
+}
+
+#feedlyPageHolderFX {
+  min-height: 100% !important;
+}
+
+/* Dock Peek */
+.feedlyChrome--leftnav-peek .LeftnavPin {
+  margin-left: var(--left-nav-dock-width) !important;
+}
+
+/* Dock Pinned */
+.feedlyChrome--leftnav-open #feedlyFrame,
+.feedlyChrome--leftnav-open #barsFX,
+.feedlyChrome--leftnav-open .LeftnavPin {
+  margin-left: var(--left-nav-total-width) !important;
+}
+
+/* Make the window draggable, when scrolled nothing seems to work */
+#barsFX {
+  -webkit-app-region: drag !important;
 }
