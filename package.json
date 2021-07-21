@@ -1,13 +1,13 @@
 {
   "name": "feedly-app",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "productName": "Feedly",
   "appVersion": "Zero",
   "appCopyright": "Christopher Newton",
   "description": "Feedly as a macOS app",
   "main": "src/main.js",
   "engines": {
-    "node": "10.7"
+    "node": "14"
   },
   "scripts": {
     "start": "electron src/main.js",
@@ -16,9 +16,9 @@
   "author": "Christopher Newton (https://github.com/chrstphrknwtn)",
   "license": "ISC",
   "devDependencies": {
-    "appdmg": "0.6.0",
-    "chalk": "3.0.0",
+    "appdmg": "0.6.1",
+    "chalk": "4.1.1",
     "electron": "13.1.7",
-    "electron-packager": "14.1.0"
+    "electron-packager": "15.3.0"
   }
 }
