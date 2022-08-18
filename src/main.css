@@ -30,7 +30,7 @@ h1 a,
   --left-nav-total-width: calc(var(--left-nav-dock-width) + var(--left-nav-list-width));
 }
 
-.Leftnav__dock {
+.LeftnavDock {
   width: var(--left-nav-dock-width) !important;
   padding-top: 38px !important;
 }
